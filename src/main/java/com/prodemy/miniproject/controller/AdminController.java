@@ -209,7 +209,7 @@ public class AdminController {
     @GetMapping("/admin/users/delete/{id}")
     public String deleteUser(@PathVariable Long id){
         userService.deleteUserById(id);
-        return "/redirect:/admin/users";
+        return "redirect:/admin/users";
     }
 
     @GetMapping("/admin/users/update/{id}")
@@ -219,7 +219,7 @@ public class AdminController {
 //        return "usersUpdate";
         Optional<User> user = userService.getUserById(id);
         if(user.isPresent()) {
-            model.addAttribute("user", user.get());
+            model.addAttribute("users", user.get());
             return "usersUpdate";
         } else {
             return "404";

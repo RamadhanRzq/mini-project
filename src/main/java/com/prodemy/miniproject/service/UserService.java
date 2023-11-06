@@ -8,10 +8,10 @@ import com.prodemy.miniproject.model.User;
 
 public interface UserService {
 
-    void saveUser(UserDto userDto);
-    User findUserByEmail(String email);
-    List<UserDto> findAllUsers();
-    Optional<User> getUserById(Long id);
-    void deleteUserById(Long id);
+    public void saveUser(UserDto userDto);
+    public User findUserByEmail(String email);
+    public List<UserDto> findAllUsers();
+    public Optional<User> getUserById(Long id);
+    public void deleteUserById(Long id);
 
 }

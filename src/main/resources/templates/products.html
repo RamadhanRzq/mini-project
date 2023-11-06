@@ -38,6 +38,18 @@
 <div class="container-fluid">
 
     <a th:href="@{/admin/products/add}" style="margin: 20px 0" class="btn btn-primary">Add Product</a>
+    <div class="col-lg-3">
+        <div class="md-form md-outline mb-0 mb-lg-4">
+            <label for="filterByName">Filter By Name</label>
+            <input type="text" id="filterByName" required class="form-control ">
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="md-form md-outline mb-0 mb-lg-4">
+            <label for="filterByPrice">Filter By Price</label>
+            <input type="text" id="filterByPrice" required class="form-control ">
+        </div>
+    </div>
     <table class="table">
         <thead class="thead-light">
         <tr>
