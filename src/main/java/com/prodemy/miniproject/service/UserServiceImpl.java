@@ -2,6 +2,7 @@ package com.prodemy.miniproject.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -75,6 +76,16 @@ public class UserServiceImpl implements UserService {
         return users.stream()
                 .map((user) -> mapToUserDto(user))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 
     private UserDto mapToUserDto(User user){

@@ -23,7 +23,7 @@ public class Product {
     @JoinColumn(name="category_id", referencedColumnName = "category_id")
     private Category category;
 
-    private double productPrice;
+    private Long productPrice;
 
     private String productDescription;
 

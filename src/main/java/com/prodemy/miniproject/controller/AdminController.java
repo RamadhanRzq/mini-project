@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
+import com.prodemy.miniproject.dto.UserDto;
 import com.prodemy.miniproject.model.Shipping;
+import com.prodemy.miniproject.model.User;
 import com.prodemy.miniproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,8 @@ public class AdminController {
     ProductServiceImpl productService;
     @Autowired
     ShippingServiceImpl shippingService;
+    @Autowired
+    UserServiceImpl userService;
     
     // Show admin home
     @GetMapping("/admin")
@@ -176,5 +181,48 @@ public class AdminController {
             return "404";
         }
     }
-    
+
+    //USER
+    // Show admin users
+    @GetMapping("/admin/users")
+    public String getUsers(Model model){
+        List<UserDto> users = userService.findAllUsers();
+        model.addAttribute("users", users);
+        return "users";
+    }
+
+    // Show admin add new users
+    @GetMapping("/admin/users/add")
+    public String getUserAdd(Model model){
+        model.addAttribute("userDto", new UserDto());
+        return "usersAdd";
+    }
+
+    // Add new users
+    @PostMapping("/admin/users/add")
+    public String postUserAdd(@ModelAttribute("user") UserDto userDto){
+        userService.saveUser(userDto);
+        return "redirect:/admin/users";
+    }
+
+    // Remove users
+    @GetMapping("/admin/users/delete/{id}")
+    public String deleteUser(@PathVariable Long id){
+        userService.deleteUserById(id);
+        return "/redirect:/admin/users";
+    }
+
+    @GetMapping("/admin/users/update/{id}")
+    public String updateUser(@PathVariable Long id, Model model){
+//        User user = userService.getUserById(id);
+//        model.addAttribute("user", user);
+//        return "usersUpdate";
+        Optional<User> user = userService.getUserById(id);
+        if(user.isPresent()) {
+            model.addAttribute("user", user.get());
+            return "usersUpdate";
+        } else {
+            return "404";
+        }
+    }
 }

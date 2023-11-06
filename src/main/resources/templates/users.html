@@ -9,7 +9,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <title>Admin | Home</title>
+    <title>Document</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" >
@@ -36,59 +36,33 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 pt-3" >
-            <div class="card" style="background-color:white;">
-                <div class="card-body">
-                    <h4 class="card-title">Products</h4>
-                    <p class="card-text">Manage all the products here.</p>
-                    <a href="#" th:href="@{/admin/products}" class="card-link btn btn-primary">Manage</a>
+<div class="container">
 
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 pt-3" >
-            <div class="card" style="background-color:white;">
-                <div class="card-body">
-                    <h4 class="card-title">Shipping</h4>
-                    <p class="card-text">Manage all the shipping method here.</p>
-                    <a href="#" th:href="@{/admin/shipping}" class="card-link btn btn-primary">Manage</a>
+    <a th:href="@{/admin/users/add}" style="margin: 20px 0" class="btn btn-primary">Add User</a>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">SN</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+        </tr>
+        </thead>
+        <tbody>
 
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 pt-3" >
-            <div class="card" style="background-color:white;">
-                <div class="card-body">
-                    <h4 class="card-title">Payment</h4>
-                    <p class="card-text">Manage all the payment method here.</p>
-                    <a href="#" th:href="@{/admin/payment}" class="card-link btn btn-primary">Manage</a>
+        <tr th:each="user, iStat : ${users}">
+            <th scope="row" th:text="${iStat.index + 1}">1</th>
+            <td th:text = "${user.firstName}">Larry</td>
+            <td th:text = "${user.lastName}">Larry</td>
+            <td th:text = "${user.email}">Larry</td>
+            <td><a href="" th:href="@{/admin/users/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+            <td><a href="" th:href="@{/admin/users/update/{id}(id=${user.id})}" class="btn btn-warning">Update</a></td>
 
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 pt-3" >
-            <div class="card" style="background-color:white;">
-                <div class="card-body">
-                    <h4 class="card-title">User</h4>
-                    <p class="card-text">Manage all the data user here.</p>
-                    <a href="#" th:href="@{/admin/users}" class="card-link btn btn-primary">Manage</a>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 pt-3" >
-            <div class="card" style="background-color:white;">
-                <div class="card-body">
-                    <h4 class="card-title">Categories</h4>
-                    <p class="card-text">Manage all the data categories here.</p>
-                    <a href="#" th:href="@{/admin/categories}" class="card-link btn btn-primary">Manage</a>
-
-                </div>
-            </div>
-        </div>
-    </div>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 
