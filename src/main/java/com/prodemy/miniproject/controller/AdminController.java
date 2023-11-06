@@ -65,7 +65,7 @@ public class AdminController {
     @GetMapping("/admin/categories/delete/{id}")
     public String deleteCat(@PathVariable Long id){
         categoryService.removeCategoryById(id);
-        return "/redirect:/admin/categories";
+        return "redirect:/admin/categories";
     }
     
     // Edit/update categories
@@ -139,7 +139,7 @@ public class AdminController {
         productDto.setImageName(product.getImageName());
 
         model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("productDto",productDto);
+        model.addAttribute("productDTO",productDto);
         return "productsAdd";
     }
 
