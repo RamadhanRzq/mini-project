@@ -24,7 +24,7 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     @NotEmpty
     @Email(message = "{errors.invalid_email}")
     private String email;

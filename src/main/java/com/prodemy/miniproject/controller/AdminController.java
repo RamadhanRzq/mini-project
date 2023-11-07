@@ -217,16 +217,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/users/update/{id}")
-    public String updateUser(@PathVariable Long id, Model model){
-//        User user = userService.getUserById(id);
-//        model.addAttribute("user", user);
-//        return "usersUpdate";
-        Optional<User> user = userService.getUserById(id);
-        if(user.isPresent()) {
-            model.addAttribute("users", user.get());
-            return "usersUpdate";
-        } else {
-            return "404";
-        }
+    public String updateUser(@PathVariable(value="id") Long id, Model model) {
+        UserDto userDto = userService.getUserById(id);
+        model.addAttribute("userDto", userDto);
+        return "usersAdd";
     }
 }

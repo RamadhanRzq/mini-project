@@ -79,8 +79,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public UserDto getUserById(Long id) {
+        Optional<User> Users = userRepository.findById(id);
+        User user = null;
+        if(Users.isPresent())
+        {
+            user = Users.get();
+        }
+        else
+        {
+            throw new RuntimeException("Student not found for id: " + id);
+        }
+        return mapToUserDto(user);
     }
 
     @Override
@@ -90,6 +100,7 @@ public class UserServiceImpl implements UserService {
 
     private UserDto mapToUserDto(User user){
         UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
         String[] str = user.getName().split(" ");
         userDto.setFirstName(str[0]);
         userDto.setLastName(str[1]);
