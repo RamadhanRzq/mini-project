@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
+        this.userRepository.deleteById(id);
     }
 
     private UserDto mapToUserDto(User user){

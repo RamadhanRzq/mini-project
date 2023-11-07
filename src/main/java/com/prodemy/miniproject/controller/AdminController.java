@@ -170,12 +170,12 @@ public class AdminController {
         return "redirect:/admin/shipping";
     }
     @GetMapping("/admin/shipping/delete/{id}")
-    public String deleteShipping(@PathVariable Long id){
+    public String deleteShipping(@PathVariable long id){
         shippingService.removeShippingById(id);
         return "/redirect:/admin/shipping";
     }
     @GetMapping("/admin/shipping/update/{id}")
-    public String updateShipping(@PathVariable Long id, Model model){
+    public String updateShipping(@PathVariable long id, Model model){
         Optional<Shipping> shipping = shippingService.getShippingById(id);
 
         if(shipping.isPresent()) {
@@ -211,13 +211,13 @@ public class AdminController {
 
     // Remove users
     @GetMapping("/admin/users/delete/{id}")
-    public String deleteUser(@PathVariable Long id){
-        userService.deleteUserById(id);
+    public String deleteUser(@PathVariable (value = "id") long id){
+        this.userService.deleteUserById(id);
         return "redirect:/admin/users";
     }
 
     @GetMapping("/admin/users/update/{id}")
-    public String updateUser(@PathVariable(value="id") Long id, Model model) {
+    public String updateUser(@PathVariable(value="id") long id, Model model) {
         UserDto userDto = userService.getUserById(id);
         model.addAttribute("userDto", userDto);
         return "usersAdd";
