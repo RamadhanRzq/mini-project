@@ -1,5 +1,6 @@
 package com.prodemy.miniproject.controller;
 
+import com.prodemy.miniproject.global.GlobalData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +27,14 @@ public class HomeController {
     public String shop(Model model){
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("cartCount", GlobalData.cart.size());
         return "shop";
     }
     
     @GetMapping("/shop/category/{id}")
     public String shopByCategory(Model model, @PathVariable Long id){
         model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("cartCount", GlobalData.cart.size());
         model.addAttribute("products", productService.getAllProductsById(id));
         return "shop";
     }
@@ -39,6 +42,7 @@ public class HomeController {
     @GetMapping("/shop/viewproduct/{id}")
     public String viewProduct(Model model, @PathVariable Long id){
         model.addAttribute("product",productService.getProductById(id).get());
+        model.addAttribute("cartCount", GlobalData.cart.size());
         return "viewProduct";
     }
     
