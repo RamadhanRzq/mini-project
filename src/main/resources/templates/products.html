@@ -66,7 +66,7 @@
             <th scope="row" th:text="${iStat.index + 1}">1</th>
             <td th:text="${product.productName}"></td>
             <td th:text="${product.category.name}"></td>
-            <td th:text="${product.productPrice}"></td>
+            <td th:text="${#numbers.formatDecimal(product.productPrice, 0, 'COMMA', 0, 'POINT')}"></td>
             <td><img src="" height="100px" width="100px"  th:src="@{${'/productImages/' + product.imageName}}"></td>
 
             <td><a href="" th:href="@{/admin/products/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a></td>
