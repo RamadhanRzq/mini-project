@@ -1,5 +1,6 @@
 package com.prodemy.miniproject.web;
 
+import com.prodemy.miniproject.global.GlobalData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ public class AuthController {
 	 // Handler method to handle login request
     @GetMapping("/login")
     public String login(){
+        GlobalData.cart.clear();
         return "login";
     }
     
