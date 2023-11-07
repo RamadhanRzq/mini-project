@@ -15,9 +15,18 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
     ProductRepository productRepository;
 
-    public List<Product> getAllProducts(){
+    public List<Product> searchProductByName(String keyword){
+        if(keyword != null){
+            return productRepository.searchByName(keyword);
+        } else
+        return (List<Product>) productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
+
     public void addProduct(Product product){
         productRepository.save(product);
     }
