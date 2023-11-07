@@ -59,7 +59,7 @@
         </div>
         <div class="col-sm-7 mt-5">
             <h2 th:text="${product.productName}"></h2>
-            <p th:text="${product.category.name}"></p>
+            <p>Category : <span th:text="${product.category.name}"></span></p>
             <h2>Rp. <span th:text="${product.productPrice}"></span></h2>
             <p th:text="${product.productDescription}"></p>
             <a href="" th:href="@{/addToCart/{id}(id = ${product.id})}" class="btn btn-primary">Add to cart</a>
