@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +68,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUser(UserDto userDto) {
+        User user = userRepository.findByEmail(userDto.getEmail());
+
+        user.setName(userDto.getFirstName() + " " + userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+
+        userRepository.save(user);
+    }
+
+    @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -91,6 +104,17 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Student not found for id: " + id);
         }
         return mapToUserDto(user);
+    }
+
+    @Override
+    public User getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails userDetails) {
+            return findUserByEmail(userDetails.getUsername());
+        } else {
+            return null;
+        }
     }
 
     @Override
