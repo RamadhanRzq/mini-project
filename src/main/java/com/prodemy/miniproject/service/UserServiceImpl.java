@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
         }
         else
         {
-            throw new RuntimeException("Student not found for id: " + id);
+            throw new RuntimeException("User not found for id: " + id);
         }
         return mapToUserDto(user);
     }

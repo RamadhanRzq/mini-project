@@ -1,7 +1,6 @@
 package com.prodemy.miniproject.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.prodemy.miniproject.dto.UserDto;
 import com.prodemy.miniproject.model.User;
