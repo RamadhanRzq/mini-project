@@ -3,10 +3,12 @@ package com.prodemy.miniproject.service;
 import com.prodemy.miniproject.model.Payment;
 import com.prodemy.miniproject.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PaymentServiceImpl implements PaymentService{
     @Autowired
     PaymentRepository paymentRepository;

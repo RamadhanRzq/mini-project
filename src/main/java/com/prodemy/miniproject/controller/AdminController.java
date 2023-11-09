@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.prodemy.miniproject.dto.UserDto;
-import com.prodemy.miniproject.model.Shipping;
-import com.prodemy.miniproject.model.User;
+import com.prodemy.miniproject.model.*;
 import com.prodemy.miniproject.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.prodemy.miniproject.dto.ProductDto;
-import com.prodemy.miniproject.model.Category;
-import com.prodemy.miniproject.model.Product;
 
 @Controller
 public class AdminController {
@@ -39,6 +36,9 @@ public class AdminController {
     ShippingServiceImpl shippingService;
     @Autowired
     UserServiceImpl userService;
+
+    @Autowired
+    PaymentServiceImpl paymentService;
     
     // Show admin home
     @GetMapping("/admin")
@@ -221,5 +221,38 @@ public class AdminController {
         UserDto userDto = userService.getUserById(id);
         model.addAttribute("userDto", userDto);
         return "usersAdd";
+    }
+
+    //SHIPPING
+    @GetMapping("/admin/payment")
+    public String getPayment(Model model){
+        model.addAttribute("payments",paymentService.getAllPayment());
+        return "payment";
+    }
+    @GetMapping("/admin/payment/add")
+    public String getPaymentAdd(Model model){
+        model.addAttribute("payment", new Payment());
+        return "paymentAdd";
+    }
+    @PostMapping("/admin/payment/add")
+    public String postPaymentAdd(@ModelAttribute("payment") Payment payment){
+        paymentService.addPayment(payment);
+        return "redirect:/admin/payment";
+    }
+    @GetMapping("/admin/payment/delete/{id}")
+    public String deletePayment(@PathVariable long id){
+        paymentService.removePaymentById(id);
+        return "/redirect:/admin/payment";
+    }
+    @GetMapping("/admin/payment/update/{id}")
+    public String updatePayment(@PathVariable long id, Model model){
+        Optional<Payment> payment = paymentService.getPaymentById(id);
+
+        if(payment.isPresent()) {
+            model.addAttribute("payment", payment.get());
+            return "paymentAdd";
+        } else {
+            return "404";
+        }
     }
 }
