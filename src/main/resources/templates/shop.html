@@ -58,6 +58,12 @@
             </ul>
         </div>
         <div class="col-sm-9">
+            <div class="d-flex mb-3">
+                <form th:action="@{/shop}">
+                    <input type="text" name="keyword" id="keyword" th:value="${keyword}" required>
+                    <input type="submit" class="btn btn-primary mx-3" value="Search"></input>
+                </form>
+            </div>
             <div class="card" style="margin-top: 20px" th:each="product : ${products}">
                 <div class="row no-gutters">
                     <div class="col-sm-5 d-flex justify-content-center">

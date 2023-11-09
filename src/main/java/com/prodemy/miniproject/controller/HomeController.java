@@ -1,7 +1,9 @@
 package com.prodemy.miniproject.controller;
 
 import com.prodemy.miniproject.global.GlobalData;
+import com.prodemy.miniproject.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.prodemy.miniproject.service.CategoryServiceImpl;
 import com.prodemy.miniproject.service.ProductServiceImpl;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -24,10 +28,13 @@ public class HomeController {
     }
     
     @GetMapping("/shop")
-    public String shop(Model model){
+    public String shop(Model model, @Param("keyword") String keyword){
+        List<Product> listProduct = productService.searchProductByName(keyword);
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("products", productService.getAllProducts());
         model.addAttribute("cartCount", GlobalData.cart.size());
+        model.addAttribute("listProduct", listProduct);
+        model.addAttribute("keyword",keyword);
         return "shop";
     }
     
